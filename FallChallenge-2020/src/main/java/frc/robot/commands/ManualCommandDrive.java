@@ -7,22 +7,31 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.command.Command;
+import frc.robot.OI;
 import frc.robot.Robot;
+import frc.robot.util.Xbox;
+import com.ctre.phoenix.motorcontrol.can.BaseMotorController;
+import edu.wpi.first.wpilibj.GenericHID;
 
 /**
  * The command that constantly drives the robot around.
  * 
- * NOTE: READ THE COMMENTS BRO I'M ONLY GIVING YOU COOL COMMENTS IN THIS COMMAND AND THE SUBSYSTEMDRIVE
- * CLASS AND YOURE ON YOUR OWN FOR THE REST OF THEM SO READ MY COMMENTS
+ * NOTE: READ THE COMMENTS BRO I'M ONLY GIVING YOU COOL COMMENTS IN THIS COMMAND
+ * AND THE SUBSYSTEMDRIVE CLASS AND YOURE ON YOUR OWN FOR THE REST OF THEM SO
+ * READ MY COMMENTS
  */
 public class ManualCommandDrive extends Command {
   public ManualCommandDrive() {
     /**
-     * Any subsystems that the command will ever reference need to be declared here using requires().
-     * Since the only subsystem I use here is the drivetrain, that is the only one I requre.
+     * Any subsystems that the command will ever reference need to be declared here
+     * using requires(). Since the only subsystem I use here is the drivetrain, that
+     * is the only one I requre.
      * 
-     * This one's free, you have to do requres() yourself for the rest of the commands lol
+     * This one's free, you have to do requres() yourself for the rest of the
+     * commands lol
      */
 
     requires(Robot.SUB_DRIVE);
@@ -33,8 +42,9 @@ public class ManualCommandDrive extends Command {
   protected void initialize() {
     /**
      * Nothing needs to be done for the drivetrain when this command starts
-     * (especially since it runs several times a second during teleop), so this method can stay blank.
-     * This method will usually only be used for more complex commands.
+     * (especially since it runs several times a second during teleop), so this
+     * method can stay blank. This method will usually only be used for more complex
+     * commands.
      */
   }
 
@@ -42,9 +52,11 @@ public class ManualCommandDrive extends Command {
   @Override
   protected void execute() {
     /**
-     * After the command starts, this method is called periodically until the isFinished() method returns true. 
-     * Since this command exists simply to drive the robot manually, what do y'all think you should put here?
+     * After the command starts, this method is called periodically until the
+     * isFinished() method returns true. Since this command exists simply to drive
+     * the robot manually, what do y'all think you should put here?
      */
+
   }
 
   // Make this return true when this Command no longer needs to run execute()
