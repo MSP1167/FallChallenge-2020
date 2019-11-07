@@ -59,15 +59,36 @@ public class SubsystemDrive extends Subsystem {
   public void DriveTankByController(Joystick controller) {
     double RIGHT_SPEED;
     double LEFT_SPEED;
-    RIGHT_SPEED =Xbox.RT(controller);
-    LEFT_SPEED = Xbox.LT(controller);
+    double STEERING;
+    double THROTTLE;
+    double extra;
+    
+    THROTTLE = Xbox.RT(controller) - Xbox.LT(controller);
+    STEERING = Xbox.LEFT_X(controller);
+    RIGHT_SPEED = THROTTLE - STEERING;
+    LEFT_SPEED = THROTTLE + STEERING;
+
+    // Fancy way of preventing overflow
+    if(RIGHT_SPEED > 1){
+      extra = 1 - RIGHT_SPEED;
+      RIGHT_SPEED = RIGHT_SPEED - extra;
+    }
+    if(LEFT_SPEED > 1){
+      extra = 1 - LEFT_SPEED;
+      LEFT_SPEED = LEFT_SPEED - extra;
+    }
+    if(RIGHT_SPEED < -1){
+      extra = -1 - RIGHT_SPEED;
+      RIGHT_SPEED = RIGHT_SPEED + extra;
+    }
+    if(LEFT_SPEED < -1){
+      extra = -1 - LEFT_SPEED;
+      LEFT_SPEED = LEFT_SPEED + extra;
+    }
+
     RIGHT_MASTER.set(ControlMode.PercentOutput, RIGHT_SPEED);
     RIGHT_SLAVE.set(ControlMode.PercentOutput, RIGHT_SPEED);
     LEFT_MASTER.set(ControlMode.PercentOutput, LEFT_SPEED);
     LEFT_SLAVE.set(ControlMode.PercentOutput, LEFT_SPEED);
-    RIGHT_MASTER.set(ControlMode.PercentOutput, RIGHT_SPEED * -1);
-    RIGHT_SLAVE.set(ControlMode.PercentOutput, RIGHT_SPEED * -1);
-    LEFT_MASTER.set(ControlMode.PercentOutput, LEFT_SPEED * -1);
-    LEFT_SLAVE.set(ControlMode.PercentOutput, LEFT_SPEED * -1);
   }
 }
