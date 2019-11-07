@@ -56,7 +56,7 @@ public class ManualCommandDrive extends Command {
      * isFinished() method returns true. Since this command exists simply to drive
      * the robot manually, what do y'all think you should put here?
      */
-
+      Robot.SUB_DRIVE.DriveTankByController(OI.DRIVER);
   }
 
   // Make this return true when this Command no longer needs to run execute()
