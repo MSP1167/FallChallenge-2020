@@ -57,13 +57,17 @@ public class SubsystemDrive extends Subsystem {
    * @param controller the XBox controller to pull input from (OI.DRIVER or OI.OPERATOR)
    */
   public void DriveTankByController(Joystick controller) {
-      RIGHT_MASTER.set(ControlMode.PercentOutput, Xbox.RT(controller));
-      RIGHT_SLAVE.set(ControlMode.PercentOutput, Xbox.RT(controller));
-      LEFT_MASTER.set(ControlMode.PercentOutput, Xbox.RT(controller));
-      LEFT_SLAVE.set(ControlMode.PercentOutput, Xbox.RT(controller));
-      RIGHT_MASTER.set(ControlMode.PercentOutput, Xbox.LT(controller) * -1);
-      RIGHT_SLAVE.set(ControlMode.PercentOutput, Xbox.LT(controller) * -1);
-      LEFT_MASTER.set(ControlMode.PercentOutput, Xbox.LT(controller) * -1);
-      LEFT_SLAVE.set(ControlMode.PercentOutput, Xbox.LT(controller) * -1);
+    double RIGHT_SPEED;
+    double LEFT_SPEED;
+    RIGHT_SPEED =Xbox.RT(controller);
+    LEFT_SPEED = Xbox.LT(controller);
+    RIGHT_MASTER.set(ControlMode.PercentOutput, RIGHT_SPEED);
+    RIGHT_SLAVE.set(ControlMode.PercentOutput, RIGHT_SPEED);
+    LEFT_MASTER.set(ControlMode.PercentOutput, LEFT_SPEED);
+    LEFT_SLAVE.set(ControlMode.PercentOutput, LEFT_SPEED);
+    RIGHT_MASTER.set(ControlMode.PercentOutput, RIGHT_SPEED * -1);
+    RIGHT_SLAVE.set(ControlMode.PercentOutput, RIGHT_SPEED * -1);
+    LEFT_MASTER.set(ControlMode.PercentOutput, LEFT_SPEED * -1);
+    LEFT_SLAVE.set(ControlMode.PercentOutput, LEFT_SPEED * -1);
   }
 }
