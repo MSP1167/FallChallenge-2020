@@ -9,8 +9,11 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import frc.robot.Constants;
 import frc.robot.commands.ManualCommandDrive;
-//import com.ctre.phoenix.motorcontrol.can.BaseMotorController;;
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import frc.robot.util.Xbox;
 
 /**
  * The Subsystem class for the drivetrain. All methods and objects required for driving the robot should be put 
@@ -21,8 +24,16 @@ public class SubsystemDrive extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
 
+  private TalonSRX RIGHT_MASTER;
+  private TalonSRX LEFT_MASTER;
+  private TalonSRX RIGHT_SLAVE;
+  private TalonSRX LEFT_SLAVE;
+
   public SubsystemDrive() {
-    
+    RIGHT_MASTER = new TalonSRX(Constants.DRIVE_RIGHT_MASTER_ID);
+    LEFT_MASTER = new TalonSRX(Constants.DRIVE_LEFT_MASTER_ID);
+    RIGHT_SLAVE = new TalonSRX(Constants.DRIVE_RIGHT_SLAVE_ID);
+    LEFT_SLAVE = new TalonSRX(Constants.DRIVE_LEFT_SLAVE_ID);
   }
 
   @Override
@@ -46,6 +57,13 @@ public class SubsystemDrive extends Subsystem {
    * @param controller the XBox controller to pull input from (OI.DRIVER or OI.OPERATOR)
    */
   public void DriveTankByController(Joystick controller) {
-    
+      RIGHT_MASTER.set(ControlMode.PercentOutput, Xbox.RT(controller));
+      RIGHT_SLAVE.set(ControlMode.PercentOutput, Xbox.RT(controller));
+      LEFT_MASTER.set(ControlMode.PercentOutput, Xbox.RT(controller));
+      LEFT_SLAVE.set(ControlMode.PercentOutput, Xbox.RT(controller));
+      RIGHT_MASTER.set(ControlMode.PercentOutput, Xbox.LT(controller) * -1);
+      RIGHT_SLAVE.set(ControlMode.PercentOutput, Xbox.LT(controller) * -1);
+      LEFT_MASTER.set(ControlMode.PercentOutput, Xbox.LT(controller) * -1);
+      LEFT_SLAVE.set(ControlMode.PercentOutput, Xbox.LT(controller) * -1);
   }
 }
