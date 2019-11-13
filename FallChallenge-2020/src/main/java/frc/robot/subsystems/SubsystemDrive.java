@@ -24,11 +24,13 @@ public class SubsystemDrive extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
 
+  // Declare Talon Names
   private TalonSRX RIGHT_MASTER;
   private TalonSRX LEFT_MASTER;
   private TalonSRX RIGHT_SLAVE;
   private TalonSRX LEFT_SLAVE;
 
+  // Declare Talon Values
   public SubsystemDrive() {
     RIGHT_MASTER = new TalonSRX(Constants.DRIVE_RIGHT_MASTER_ID);
     LEFT_MASTER = new TalonSRX(Constants.DRIVE_LEFT_MASTER_ID);
@@ -57,18 +59,20 @@ public class SubsystemDrive extends Subsystem {
    * @param controller the XBox controller to pull input from (OI.DRIVER or OI.OPERATOR)
    */
   public void DriveTankByController(Joystick controller) {
+    // Basic Var Names
     double RIGHT_SPEED;
     double LEFT_SPEED;
     double STEERING;
     double THROTTLE;
     double extra;
     
+    // Set those variables
     THROTTLE = Xbox.RT(controller) - Xbox.LT(controller);
     STEERING = Xbox.LEFT_X(controller);
     RIGHT_SPEED = THROTTLE - STEERING;
     LEFT_SPEED = THROTTLE + STEERING;
 
-    // Fancy way of preventing overflow
+    // Fancy way of preventing overflow (-1 Min & 1 Max)
     if(RIGHT_SPEED > 1){
       extra = 1 - RIGHT_SPEED;
       RIGHT_SPEED = RIGHT_SPEED - extra;
@@ -86,6 +90,7 @@ public class SubsystemDrive extends Subsystem {
       LEFT_SPEED = LEFT_SPEED + extra;
     }
 
+    // Finally set the value of the talons
     RIGHT_MASTER.set(ControlMode.PercentOutput, RIGHT_SPEED);
     RIGHT_SLAVE.set(ControlMode.PercentOutput, RIGHT_SPEED);
     LEFT_MASTER.set(ControlMode.PercentOutput, LEFT_SPEED);
