@@ -12,6 +12,9 @@ import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 import frc.robot.util.Xbox;
+import frc.robot.commands.ButtonCommandEat;
+import frc.robot.commands.ButtonCommandSpit;
+import frc.robot.commands.ButtonCommandToggleClamp;
 
 /**
  * The OI is where the two XBox controllers (or other controllers) are referenced, and some control is assigned.
@@ -30,5 +33,10 @@ public class OI {
      */
     public OI() {
         Button toggleClamp = new JoystickButton(OPERATOR, Xbox.B); //clamp is toggled by pressing B on the operator controller
+        toggleClamp.whenPressed(new ButtonCommandToggleClamp());
+        Button manipulatorEat = new JoystickButton(OPERATOR, Xbox.A); // Manipulator sucks in
+        manipulatorEat.whenPressed(new ButtonCommandEat());
+        Button manipulatorSpit = new JoystickButton(OPERATOR, Xbox.Y); // Manipulator spits out
+        manipulatorSpit.whenPressed(new ButtonCommandSpit());
     }
 }

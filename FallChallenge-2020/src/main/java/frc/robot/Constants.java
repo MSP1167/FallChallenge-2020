@@ -18,8 +18,8 @@ public class Constants {
     //drivetrain motor IDs
     public static int 
         DRIVE_LEFT_MASTER_ID  = 1,
-        DRIVE_RIGHT_MASTER_ID = 2,
-        DRIVE_LEFT_SLAVE_ID   = 3,
+        DRIVE_RIGHT_MASTER_ID = 3,
+        DRIVE_LEFT_SLAVE_ID   = 2,
         DRIVE_RIGHT_SLAVE_ID  = 4;
 
     //mast motor IDs

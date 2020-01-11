@@ -8,6 +8,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.InstantCommand;
+import frc.robot.Robot;
 
 /**
  * Toggles the state of SubsystemClamp.
@@ -24,12 +25,13 @@ public class ButtonCommandToggleClamp extends InstantCommand {
     super();
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
+    requires(Robot.SUB_CLAMP);
   }
 
   // Called once when the command executes
   @Override
   protected void initialize() {
-
+    Robot.SUB_CLAMP.setOpen(true);
   }
 
 }
